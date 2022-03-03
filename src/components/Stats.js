@@ -13,11 +13,12 @@ export default function Stats() {
         eggCollectionBirthRate,
         embrioTransferCycles,
         embrioTransferPregnancyRate,
-        embrioTransferBirthRate } = useContext(FertilityCalculatorContext);
+        embrioTransferBirthRate,
+        isPending } = useContext(FertilityCalculatorContext);
 
     return (
         <>
-
+            {/* {isPending && <div class="overlay"><img className="overlay-loader" src={spinner} /></div>} */}
             <div className="stats-top__conatiner">
                 <div className="stats-top__conatiner-title">
                     <h2>From <span className="stats-top__patients">{patientsTotal}</span> Patients</h2>

@@ -1,7 +1,6 @@
 import { useState, createContext, useEffect } from 'react';
-
+import axios from 'axios';
 export const FertilityCalculatorContext = createContext();
-
 
 export const FertilityCalculatorProvider = ({ children }) => {
     const [value, setValue] = useState({ optage: '', optblasto: 'All', select_optfsh: '', select_optam: '', optattmpt: '' });
@@ -15,13 +14,19 @@ export const FertilityCalculatorProvider = ({ children }) => {
     const [embrioTransferCycles, setEmbrioTransferCycles] = useState('');
     const [embrioTransferPregnancyRate, setEmbrioTransferPregnancyRate] = useState('');
     const [embrioTransferBirthRate, setEmbrioTransferBirthRate] = useState('');
+    const [isPending, setIsPending] = useState(true);
 
-
+    // fetching the data each time the values of any of select drop-downs change
     useEffect(() => {
-        fetch(`http://localhost:5000/fertilityCalculatorResults${value.optblasto}`)
-            .then(response => response.json())
-            .then(data => displayData(data));
         console.log(value);
+
+        axios.get(`http://localhost:5000/fertilityCalculatorResults${value.optblasto}`)
+            .then(resp => {
+                displayData(resp.data);
+            })
+            .catch(error => {
+                console.log(error);
+            })
     }, [value]);
 
     const displayData = (data) => {
@@ -51,7 +56,8 @@ export const FertilityCalculatorProvider = ({ children }) => {
                 eggCollectionBirthRate,
                 embrioTransferCycles,
                 embrioTransferPregnancyRate,
-                embrioTransferBirthRate
+                embrioTransferBirthRate,
+                isPending
             }}>
             {children}
         </FertilityCalculatorContext.Provider>

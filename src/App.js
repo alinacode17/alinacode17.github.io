@@ -12,9 +12,9 @@ function App() {
     <div className="App">
       {/* {loading ? <img src={spinner} alt="Loading spinner" className="spinner" /> : <h1>Fertility Calculator</h1>} */}
       {/* <Header /> */}
+      <FormContainer />
       <Stats />
       {/* <Select /> */}
-      <FormContainer />
     </div>
   );
 }

@@ -300,6 +300,8 @@ export default function Select() {
                 <button data-select-name="optattmpt" onClick={resetSelection}>Reset</button>
             </div>
 
+
+
             <button onClick={resetAllSelections}>Reset All</button>
         </form >
     )
